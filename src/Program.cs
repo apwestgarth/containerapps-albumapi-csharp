@@ -48,7 +48,8 @@ record Album(int Id, string Title, string Artist, double Price, string Image_url
             new Album(4, "Lost in Translation", "MegaDNS", 12.99,"https://aka.ms/albums-envoylogo"),
             new Album(5, "Lock Down Your Love", "V is for VNET", 12.99, "https://aka.ms/albums-vnetlogo"),
             new Album(6, "Sweet Container O' Mine", "Guns N Probeses", 14.99, "https://aka.ms/albums-containerappslogo"),
-            new Album(7, "Back in Binary", "01000001 01000011 00101111 01000100 01000011", 12.99, "https://aka.ms/albums-containerappslogo")
+            new Album(7, "Back in Binary", "01000001 01000011 00101111 01000100 01000011", 12.99, "https://aka.ms/albums-containerappslogo"),
+            new Album(8, "Back in Binary 2", "01000001 01000011 00101111 01000100 01000011", 14.99, "https://aka.ms/albums-containerappslogo")
          };
 
         return albums; 
