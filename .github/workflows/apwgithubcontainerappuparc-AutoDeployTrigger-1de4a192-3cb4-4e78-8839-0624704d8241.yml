@@ -1,0 +1,42 @@
+name: Trigger auto deployment for apwgithubcontainerappuparc
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - 'src/**'
+    - '.github/workflows/apwgithubcontainerappuparc-AutoDeployTrigger-1de4a192-3cb4-4e78-8839-0624704d8241.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.APWGITHUBCONTAINERAPPUPARC_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}src 
+          registryUrl: ca7d79bc612cacr.azurecr.io
+          registryUsername: ${{ secrets.APWGITHUBCONTAINERAPPUPARC_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.APWGITHUBCONTAINERAPPUPARC_REGISTRY_PASSWORD }}
+          containerAppName: apwgithubcontainerappuparc
+          resourceGroup: anwestg_rg_3643
+          imageToBuild: ca7d79bc612cacr.azurecr.io/apwgithubcontainerappuparc:${{ github.sha }}
+          dockerfilePath: Dockerfile
+
+     
+
